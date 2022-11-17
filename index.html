@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Trafi Inspectioned Cars Data</title>
+  </head>
+  <body>
+    <div class="container">
+      <section class="header">
+        <label for="json_upload">Choose json file data to upload</label>
+        <input type="file" id="selectJsonFile" value="import" accept=".json" />
+        <button id="upload">Upload</button>
+      </section>
+
+      <section class="nav">
+        <input type="text" placeholder="Search..." size="50" name="searchCars" id="searchData" onkeyup="doSearch();" />
+      </section>
+      <section class="table" >
+        <table id="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Year</th>
+              <th>Make</th>
+              <th>Model</th>
+              <th>Rejection %</th>
+              <th>Rejection reason #1</th>
+              <th>Rejection reason #2</th>
+              <th>Rejection reason #3</th>
+            </tr>
+          </thead>
+          <tbody id="table-tbody">
+          </tbody>
+        </table>
+      </section>
+
+      <section class="table"></section>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
