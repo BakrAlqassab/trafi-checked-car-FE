@@ -21,8 +21,6 @@
   text-decoration: none;
   text-align: center;
   display: inline-block;
-  transition: box-shadow 0.3s ease-in-out;
-  transition: color 0.3s ease-in-out;
 }
 
 .blue-btn:hover {
@@ -154,17 +152,4 @@ hr {
   border-bottom: 1px solid #dddddd;
   color: whitesmoke;
   font-weight: 600;
-}
-
-.content-table tbody tr:nth-of-type(even) {
-  background-color: #f3f3f3;
-}
-
-.content-table tbody tr:last-of-type {
-  border-bottom: 2px solid #009879;
-}
-
-.content-table tbody tr.active-row {
-  font-weight: bold;
-  color: #009879;
 }

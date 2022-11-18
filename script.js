@@ -7,19 +7,20 @@ document.getElementById("upload").onclick = function () {
 
   var fr = new FileReader();
   fr.onload = function (e) {
-    console.log(e);
-
     var result = JSON.parse(e.target.result);
-    const formattedData = JSON.stringify(result, null, 2);
     axios
       .post("http://localhost:3000/posts/", result)
       .then((response) => {
-        this.fetchData();
-        const addedUser = response.data;
-        console.log(`POST: user is added`, addedUser);
+        fetchData();
+        location.reload();
+        res.status(201).json({
+          message: "Post created succesfully",
+          post: response,
+        });
       })
       .catch((error) => console.log(error));
-    console.log(formattedData);
+    fetchData();
+    location.reload();
   };
   fr.readAsText(jsonFiles.item(0));
 };
@@ -30,6 +31,7 @@ const fetchData = () => {
     .get("http://localhost:3000/posts/")
     .then((response) => {
       const carsData = response.data;
+      console.log(carsData.length);
       let noContentSectio = document.getElementById("no-content");
       let tabelContentSection = document.getElementById("content-table");
       if (!carsData.length) {
@@ -69,7 +71,15 @@ fetchData();
 // First filter way, can search in first and second column only in parallel and with max 50 available filtered data amount
 
 function doSearch() {
-  var input, filter, table, tr, i, j, column_length, count_td, filteredAmount = 0;
+  var input,
+    filter,
+    table,
+    tr,
+    i,
+    j,
+    column_length,
+    count_td,
+    filteredAmount = 0;
   input = document.getElementById("searchData");
   filter = input.value.toUpperCase();
   // split the entered search input based on space to filter the value value1 search for Make cell, Value 2 = search for Model cell
@@ -85,16 +95,19 @@ function doSearch() {
       txtValue2 = td2.textContent || td2.innerText;
       if (txtValue.toUpperCase().indexOf(filter[0]) > -1) {
         if (filter[1]) {
-          if (txtValue2.toUpperCase().indexOf(filter[1]) > -1 && filteredAmount < 50) {
-            filteredAmount++
-            console.log('called is')
+          if (
+            txtValue2.toUpperCase().indexOf(filter[1]) > -1 &&
+            filteredAmount < 50
+          ) {
+            filteredAmount++;
+            console.log("called is");
             tr[i].style.display = "";
           } else {
             tr[i].style.display = "none";
           }
         } else if (!filter[1] && filteredAmount < 50) {
-            console.log('called not')
-            filteredAmount++
+          console.log("called not");
+          filteredAmount++;
           tr[i].style.display = "";
         }
       } else {
@@ -103,7 +116,6 @@ function doSearch() {
     }
   }
 }
-
 
 // Second filter way, can search in any columns, with 50 max data amount
 
