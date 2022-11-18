@@ -10,16 +10,45 @@
   <body>
     <div class="container">
       <section class="header">
-        <label for="json_upload">Choose json file data to upload</label>
-        <input type="file" id="selectJsonFile" value="import" accept=".json" />
-        <button id="upload">Upload</button>
+        <div class="logo">
+          <img src="assets/Bluugo_oy_logo.png" alt="Bluugo Oy" />
+        </div>
+        <div class="upload-container">
+          <h3 for="json_upload">Choose json file data to upload</h3>
+          <input
+            type="file"
+            id="selectJsonFile"
+            value="import"
+            accept=".json"
+          />
+          <button class="uploadBtn" id="upload">Upload</button>
+        </div>
+      </section>
+      <hr />
+      <section class="nav">
+        <input
+          type="text"
+          placeholder="Search..."
+          size="50"
+          name="searchCars"
+          id="searchData"
+          class="searchInput"
+          onkeyup="doSearch()"
+        />
+        <a class="blue-btn" href="https://bluugo.fi/fi/yhteystiedot/"
+          >Varaa Demo</a
+        >
+      </section>
+      <hr />
+      <section class="no-data-section" id="no-content">
+        <h3>
+          There is no uploaded data, please upload your json file to show the
+          data table!
+        </h3>
       </section>
 
-      <section class="nav">
-        <input type="text" placeholder="Search..." size="50" name="searchCars" id="searchData" onkeyup="doSearch();" />
-      </section>
-      <section class="table" >
-        <table id="table">
+      <section class="table-section">
+        <table class="content-table" id="content-table">
           <thead>
             <tr>
               <th>ID</th>
@@ -32,8 +61,7 @@
               <th>Rejection reason #3</th>
             </tr>
           </thead>
-          <tbody id="table-tbody">
-          </tbody>
+          <tbody id="table-tbody"></tbody>
         </table>
       </section>
 
