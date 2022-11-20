@@ -11,7 +11,7 @@ document.getElementById("upload").onclick = function () {
     loadingSpinner.style.display = 'flex';
     
     axios
-      .post("http://localhost:3000/posts/", result)
+    .post("https://demo-bluugo-car-inspection-be.herokuapp.com/posts/", result)
       .then((response) => {
         loadingSpinner.style.display = 'none';
          location.reload();
@@ -26,7 +26,7 @@ const fetchData = () => {
   const loadingSpinner = document.getElementById('loading-circle');
   loadingSpinner.style.display = 'flex';
   axios
-    .get("http://localhost:3000/posts/")
+  .get("https://demo-bluugo-car-inspection-be.herokuapp.com/posts/")
     .then((response) => {
       const carsData = response.data;
       console.log(carsData.length)
