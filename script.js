@@ -1,6 +1,5 @@
 document.getElementById("upload").onclick = function () {
   var jsonFiles = document.getElementById("selectJsonFile").files;
-  console.log(jsonFiles);
   if (jsonFiles.length <= 0) {
     return false;
   }
@@ -8,29 +7,30 @@ document.getElementById("upload").onclick = function () {
   var fr = new FileReader();
   fr.onload = function (e) {
     var result = JSON.parse(e.target.result);
+    const loadingSpinner = document.getElementById('loading-circle');
+    loadingSpinner.style.display = 'flex';
+    
     axios
       .post("http://localhost:3000/posts/", result)
       .then((response) => {
-        fetchData();
-        location.reload();
-        res.status(201).json({
-          message: "Post created succesfully",
-          post: response,
-        });
+        loadingSpinner.style.display = 'none';
+         location.reload();
       })
       .catch((error) => console.log(error));
-    fetchData();
-    location.reload();
   };
   fr.readAsText(jsonFiles.item(0));
 };
 
 const fetchData = () => {
   let tblBody = document.getElementsByTagName("tbody");
+  const loadingSpinner = document.getElementById('loading-circle');
+  loadingSpinner.style.display = 'flex';
   axios
     .get("http://localhost:3000/posts/")
     .then((response) => {
       const carsData = response.data;
+      console.log(carsData.length)
+      loadingSpinner.style.display = 'none';
       console.log(carsData.length);
       let noContentSectio = document.getElementById("no-content");
       let tabelContentSection = document.getElementById("content-table");
@@ -76,14 +76,11 @@ function doSearch() {
     table,
     tr,
     i,
-    j,
-    column_length,
-    count_td,
     filteredAmount = 0;
   input = document.getElementById("searchData");
   filter = input.value.toUpperCase();
   // split the entered search input based on space to filter the value value1 search for Make cell, Value 2 = search for Model cell
-  filter = filter.split(" ");
+  filter = filter.split(/(?<=^\S+)\s/);
   table = document.getElementById("content-table");
   tr = table.getElementsByTagName("tr");
 
@@ -100,13 +97,11 @@ function doSearch() {
             filteredAmount < 50
           ) {
             filteredAmount++;
-            console.log("called is");
             tr[i].style.display = "";
           } else {
             tr[i].style.display = "none";
           }
         } else if (!filter[1] && filteredAmount < 50) {
-          console.log("called not");
           filteredAmount++;
           tr[i].style.display = "";
         }
